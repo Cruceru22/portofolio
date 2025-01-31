@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaCar, FaChartBar } from "react-icons/fa";
 import cartopiaUI from "../../../utils/Images/cartopiacompare.png";
-
+import { IconCloud } from "~/components/ui/icon-cloud";
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -31,11 +31,32 @@ const features = [
   },
 ];
 
-const techStack = ["Next.js", "React", "TailwindCSS", "TypeScript"];
+const techStack = [
+  "Next.js",
+  "React",
+  "TailwindCSS",
+  "TypeScript",
+  "Shadcn",
+  "Vercel",
+  "Auth",
+];
+
+const slugs = [
+  "nextdotjs",
+  "react",
+  "typescript",
+  "tailwindcss",
+  "vercel",
+  "clerk",
+  "framermotion",
+];
 
 export default function Cartopia() {
   const { scrollYProgress } = useScroll();
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const images = slugs.map(
+    (slug) => `https://cdn.simpleicons.org/${slug}/000000`,
+  );
 
   return (
     <div className="relative overflow-hidden py-20">
@@ -152,31 +173,16 @@ export default function Cartopia() {
           </motion.div>
 
           {/* Tech Stack */}
-          <motion.div variants={fadeInUp} className="mt-8 text-center">
+          <motion.div variants={fadeInUp}>
             <motion.h3
               variants={fadeInUp}
               className="mb-6 text-sm font-semibold uppercase tracking-wider text-gray-500"
             >
               Built with
             </motion.h3>
-            <motion.div
-              variants={staggerContainer}
-              className="flex justify-center space-x-8"
-            >
-              {techStack.map((tech, index) => (
-                <motion.div
-                  key={tech}
-                  variants={fadeInUp}
-                  whileHover={{
-                    scale: 1.1,
-                    boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-                  }}
-                  className="rounded-lg bg-white/80 px-4 py-2 text-sm font-medium text-gray-600 shadow-sm backdrop-blur-sm transition-all hover:bg-blue-50"
-                >
-                  {tech}
-                </motion.div>
-              ))}
-            </motion.div>
+            <div className="relative mx-auto h-[400px] w-[400px] overflow-hidden rounded-lg bg-white/80">
+              <IconCloud images={images} />
+            </div>
           </motion.div>
         </motion.div>
       </motion.div>

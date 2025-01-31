@@ -41,6 +41,7 @@
     "react-icons": "^5.4.0",
     "react-parallax-tilt": "^1.7.238",
     "recharts": "^2.12.7",
+    "simplex-noise": "^4.0.3",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.168.0",

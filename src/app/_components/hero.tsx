@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
-import { Suspense, useRef, useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Suspense } from "react";
+import { motion } from "framer-motion";
 
 const Developer = dynamic(() => import("./developer"), { ssr: false });
 const Car = dynamic(() => import("./car"), { ssr: false });
@@ -43,7 +43,7 @@ function AnimatedSection({
   children,
   delay,
   height,
-  isCarSection = false,
+  isCarSection,
 }: {
   children: React.ReactNode;
   delay: number;
@@ -56,7 +56,9 @@ function AnimatedSection({
       initial="hidden"
       animate="visible"
       transition={{ delay }}
-      className={`${height} w-full overflow-hidden rounded-xl p-6 shadow-xl transition-all duration-300`}
+      className={`${height} relative w-full overflow-hidden rounded-xl ${
+        isCarSection ? "border-4 border-red-500" : ""
+      } bg-white/80 p-6 shadow-xl backdrop-blur-sm transition-all duration-300`}
     >
       {children}
     </motion.div>
@@ -67,7 +69,7 @@ export default function Hero() {
   return (
     <div className="relative w-full">
       <motion.div
-        className="mx-auto flex max-w-2xl flex-col gap-8"
+        className="relative mx-auto flex max-w-2xl flex-col gap-8"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -86,21 +88,21 @@ export default function Hero() {
 
         <AnimatedSection
           delay={0.4}
-          height="h-[1000px] sm:h-[800px]"
-          isCarSection={true}
+          height="h-[900px] sm:h-[800px]"
+          isCarSection
         >
           <Suspense fallback={<LoadingSpinner />}>
             <Car />
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.6} height="h-[1200px] sm:h-[1050px]">
+        <AnimatedSection delay={0.6} height="h-[1300px]">
           <Suspense fallback={<LoadingSpinner />}>
             <Cartopia />
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.8} height="h-[1200px] sm:h-[1050px]">
+        <AnimatedSection delay={0.8} height="h-[1300px]">
           <Suspense fallback={<LoadingSpinner />}>
             <RoomPlanter />
           </Suspense>

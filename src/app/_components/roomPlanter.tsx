@@ -5,11 +5,24 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaLeaf, FaCamera } from "react-icons/fa";
 import roomPlanterUI from "../../../utils/Images/roomplanterui.png";
+import { IconCloud } from "~/components/ui/icon-cloud";
+
+const slugs = [
+  "nextdotjs",
+  "react",
+  "typescript",
+  "tailwindcss",
+  "openai",
+  "framermotion",
+];
 
 export default function RoomPlanter() {
   const { scrollYProgress } = useScroll();
   const imageScale = useTransform(scrollYProgress, [0.5, 1], [1, 1.1]);
   const imageRotate = useTransform(scrollYProgress, [0.5, 1], [0, 2]);
+  const images = slugs.map(
+    (slug) => `https://cdn.simpleicons.org/${slug}/000000`,
+  );
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -160,27 +173,15 @@ export default function RoomPlanter() {
           </motion.div>
 
           {/* Tech Stack */}
-          <motion.div className="mt-8 text-center" variants={itemVariants}>
+          <motion.div variants={itemVariants} className="mt-8 text-center">
             <motion.h3
-              className="mb-6 text-sm font-semibold uppercase tracking-wider text-gray-500"
               variants={itemVariants}
+              className="mb-6 text-sm font-semibold uppercase tracking-wider text-gray-500"
             >
               Built with
             </motion.h3>
-            <div className="flex justify-center space-x-8">
-              {["Next.js", "React", "TailwindCSS"].map((tech, index) => (
-                <motion.div
-                  key={tech}
-                  className="rounded-lg bg-white/80 px-4 py-2 text-sm font-medium text-gray-600 shadow-sm backdrop-blur-sm hover:bg-green-50"
-                  variants={itemVariants}
-                  whileHover={{
-                    scale: 1.1,
-                    boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-                  }}
-                >
-                  {tech}
-                </motion.div>
-              ))}
+            <div className="relative mx-auto h-[400px] w-[400px] overflow-hidden rounded-lg bg-white/80">
+              <IconCloud images={images} />
             </div>
           </motion.div>
         </div>
