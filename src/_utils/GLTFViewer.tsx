@@ -47,7 +47,7 @@ function Model({ url }: { url: string }) {
       // Center the model
       modelRef.current.position.set(-center.x, -center.y, -center.z);
 
-      // Optimize materials and add slight tilt
+      // Optimize materials
       scene.traverse((child) => {
         if (child instanceof THREE.Mesh) {
           child.castShadow = false;
@@ -59,18 +59,14 @@ function Model({ url }: { url: string }) {
         }
       });
 
-      // Add initial rotation for better angle
-      if (modelRef.current) {
-        modelRef.current.rotation.y = Math.PI * 0.25; // 45-degree initial rotation
-      }
-
       setIsInitialized(true);
     }
   }, [camera, isInitialized, scene]);
 
+  // Add smooth rotation animation
   useFrame((state, delta) => {
     if (modelRef.current) {
-      modelRef.current.rotation.y += delta * 0.2; // Slightly faster rotation
+      modelRef.current.rotation.y += delta * 0.2; // Smooth rotation speed
     }
   });
 
@@ -87,7 +83,7 @@ export default function GLTFViewer({ modelPath }: GLTFViewerProps) {
   }, [modelPath]);
 
   return (
-    <div className="h-[80vh] w-full">
+    <div className="h-[80vh] w-[100vw] max-w-[1200px]">
       <Canvas
         shadows={false}
         dpr={[1, 1.5]}
@@ -97,11 +93,13 @@ export default function GLTFViewer({ modelPath }: GLTFViewerProps) {
           alpha: false,
         }}
         performance={{ min: 0.5 }}
+        style={{ background: "white" }}
       >
+        <color attach="background" args={["white"]} />
         <Suspense fallback={null}>
           <Model url={modelPath} />
           <Environment preset="sunset" />
-          <ambientLight intensity={0.3} /> {/* Increased ambient light */}
+          <ambientLight intensity={0.3} />
           <spotLight
             position={[15, 15, 15]}
             angle={0.25}
@@ -109,20 +107,7 @@ export default function GLTFViewer({ modelPath }: GLTFViewerProps) {
             intensity={0.8}
             castShadow={false}
           />
-          <PerspectiveCamera
-            makeDefault
-            fov={45} // Narrower FOV for less distortion
-            position={[0, 0, 8]}
-          />
-          <OrbitControls
-            enablePan={false}
-            enableZoom={false}
-            minPolarAngle={Math.PI / 3}
-            maxPolarAngle={Math.PI * 0.6}
-            enableDamping={true}
-            dampingFactor={0.05}
-            rotateSpeed={0.5}
-          />
+          <PerspectiveCamera makeDefault fov={45} position={[0, 0, 8]} />
           <AdaptiveDpr pixelated />
           <BakeShadows />
           <AdaptiveEvents />

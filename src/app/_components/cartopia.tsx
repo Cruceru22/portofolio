@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FaCar, FaChartBar } from "react-icons/fa";
-import cartopiaUI from "../../../utils/Images/cartopia.png";
+import cartopiaUI from "../../../utils/Images/cartopiacompare.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },

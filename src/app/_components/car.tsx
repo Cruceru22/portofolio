@@ -33,20 +33,11 @@ export default function Car() {
     setIsPlaying(!isPlaying);
   };
 
-  useGSAP(() => {
-    gsap.to("#car", {
-      opacity: 1,
-      duration: 0.5,
-      ease: "power2.out",
-    });
-  }, []);
-
   return (
-    <div
-      id="car"
-      className="flex w-full flex-col items-center space-y-8 opacity-0"
-    >
-      <GLTFViewer modelPath="/m4.gltf" />
+    <div className="flex w-full flex-col items-center space-y-4">
+      <div className="-mx-6 -mt-6 flex justify-center overflow-hidden">
+        <GLTFViewer modelPath="/m4.gltf" />
+      </div>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}

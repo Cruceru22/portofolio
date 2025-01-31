@@ -43,10 +43,12 @@ function AnimatedSection({
   children,
   delay,
   height,
+  isCarSection = false,
 }: {
   children: React.ReactNode;
   delay: number;
   height: string;
+  isCarSection?: boolean;
 }) {
   return (
     <motion.div
@@ -54,7 +56,7 @@ function AnimatedSection({
       initial="hidden"
       animate="visible"
       transition={{ delay }}
-      className={`${height} w-full overflow-hidden rounded-xl border border-black/10 bg-white/5 p-6 shadow-xl transition-all duration-300 hover:border-white/20 hover:bg-white/10`}
+      className={`${height} w-full overflow-hidden rounded-xl p-6 shadow-xl transition-all duration-300`}
     >
       {children}
     </motion.div>
@@ -82,7 +84,11 @@ export default function Hero() {
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.4} height="h-[1000px] sm:h-[800px]">
+        <AnimatedSection
+          delay={0.4}
+          height="h-[1000px] sm:h-[800px]"
+          isCarSection={true}
+        >
           <Suspense fallback={<LoadingSpinner />}>
             <Car />
           </Suspense>
