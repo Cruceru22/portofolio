@@ -1,14 +1,14 @@
 "use client";
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
+import { Suspense, useRef, useState, useEffect } from "react";
 import Name from "./name";
 
 const Developer = dynamic(() => import("./developer"), { ssr: false });
-const ReactDev = dynamic(() => import("./reactDev"), { ssr: false });
 const Car = dynamic(() => import("./car"), { ssr: false });
 const Connoisseur = dynamic(() => import("./connoisseur"), { ssr: false });
-const PushToStart = dynamic(() => import("./pushToStart"), { ssr: false });
+const LetsConnect = dynamic(() => import("./letsConnect"), { ssr: false });
 const RoomPlanter = dynamic(() => import("./roomPlanter"), { ssr: false });
+const Cartopia = dynamic(() => import("./cartopia"), { ssr: false });
 
 function LoadingSpinner() {
   return (
@@ -18,27 +18,62 @@ function LoadingSpinner() {
   );
 }
 
+function useInView(options: IntersectionObserverInit = {}) {
+  const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+      if (entry) {
+        setIsInView(entry.isIntersecting);
+      }
+    }, options);
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [options]);
+
+  return { ref, isInView };
+}
+
 export default function Hero() {
+  const { ref: carRef, isInView: isCarInView } = useInView({
+    threshold: 0.1,
+    rootMargin: "100px 0px",
+  });
+
   return (
     <div className="mx-auto flex max-w-2xl flex-col space-y-8">
       <Name />
       <Suspense fallback={<LoadingSpinner />}>
         <Developer />
       </Suspense>
-      {/* <Suspense fallback={<LoadingSpinner />}>
-        <ReactDev />
-      </Suspense> */}
+      <Suspense fallback={<LoadingSpinner />}>
+        <Connoisseur />
+      </Suspense>
+      <div ref={carRef} className="min-h-[200px]">
+        {isCarInView && (
+          <Suspense fallback={<LoadingSpinner />}>
+            <Car />
+          </Suspense>
+        )}
+      </div>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Cartopia />
+      </Suspense>
       <Suspense fallback={<LoadingSpinner />}>
         <RoomPlanter />
       </Suspense>
       <Suspense fallback={<LoadingSpinner />}>
-        <Connoisseur />
-      </Suspense>
-      <Suspense fallback={<LoadingSpinner />}>
-        <Car />
-      </Suspense>
-      <Suspense fallback={<LoadingSpinner />}>
-        <PushToStart />
+        <LetsConnect />
       </Suspense>
     </div>
   );

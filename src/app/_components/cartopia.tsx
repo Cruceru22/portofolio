@@ -3,14 +3,14 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { FaLeaf, FaCamera } from "react-icons/fa";
-import roomPlanterUI from "../../../utils/Images/roomplanterui.png";
+import { FaCar, FaChartBar } from "react-icons/fa";
+import cartopiaUI from "../../../utils/Images/cartopia.png";
 
-export default function RoomPlanter() {
+export default function Cartopia() {
   return (
     <div className="relative overflow-hidden py-20">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-b from-green-50/50 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent"></div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -20,36 +20,36 @@ export default function RoomPlanter() {
         <div className="flex flex-col gap-12">
           {/* Text Content */}
           <div className="mx-auto max-w-2xl space-y-6">
-            <div className="inline-flex items-center rounded-full bg-green-100 px-4 py-2 text-green-800">
-              <FaLeaf className="mr-2" />
+            <div className="inline-flex items-center rounded-full bg-blue-100 px-4 py-2 text-blue-800">
+              <FaCar className="mr-2" />
               <span className="text-sm font-medium">Featured Project</span>
             </div>
             <h2 className="text-4xl font-bold tracking-tight text-gray-900">
-              Room Planter
+              Cartopia
             </h2>
             <p className="text-lg text-gray-600">
-              Transform your living space with the perfect plants. Simply upload
-              a photo of your room, and let AI help you visualize the perfect
-              plant arrangement for your space.
+              Find your perfect ride with ease. Compare car specifications,
+              performance metrics, and features side by side to make an informed
+              decision about your next vehicle purchase.
             </p>
             <div className="space-y-4">
               <div className="flex items-center space-x-2 text-gray-700">
-                <FaCamera className="h-5 w-5 text-green-600" />
-                <span>Upload your room photo</span>
+                <FaChartBar className="h-5 w-5 text-blue-600" />
+                <span>Compare car specifications side by side</span>
               </div>
               <div className="flex items-center space-x-2 text-gray-700">
-                <FaLeaf className="h-5 w-5 text-green-600" />
-                <span>Get AI-powered plant suggestions</span>
+                <FaCar className="h-5 w-5 text-blue-600" />
+                <span>Access trusted data from authoritative sources</span>
               </div>
             </div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href="https://room-planter-odfm.vercel.app/"
+                href="https://cartopia.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center rounded-lg bg-green-600 px-6 py-3 text-white transition-colors hover:bg-green-700"
+                className="inline-flex items-center rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
               >
-                Try Room Planter
+                Start Comparing
                 <svg
                   className="ml-2 h-4 w-4"
                   fill="none"
@@ -67,7 +67,7 @@ export default function RoomPlanter() {
             </motion.div>
           </div>
 
-          {/* Image/Demo Section - Now below the text */}
+          {/* Image/Demo Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -75,8 +75,8 @@ export default function RoomPlanter() {
             className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border bg-white/80 shadow-xl backdrop-blur-sm"
           >
             <Image
-              src={roomPlanterUI}
-              alt="Room Planter Demo"
+              src={cartopiaUI}
+              alt="Cartopia Demo"
               placeholder="blur"
               quality={95}
               priority
@@ -97,7 +97,7 @@ export default function RoomPlanter() {
               Built with
             </h3>
             <div className="flex justify-center space-x-8">
-              {["Next.js", "React", "TailwindCSS"].map((tech) => (
+              {["Next.js", "React", "TailwindCSS", "TypeScript"].map((tech) => (
                 <div
                   key={tech}
                   className="rounded-lg bg-white/80 px-4 py-2 text-sm font-medium text-gray-600 shadow-sm backdrop-blur-sm"
