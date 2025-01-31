@@ -39,7 +39,6 @@ export default function Cartopia() {
 
   return (
     <div className="relative overflow-hidden py-20">
-      {/* Animated background gradient */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-b from-blue-50/50 to-transparent"
         initial={{ opacity: 0 }}

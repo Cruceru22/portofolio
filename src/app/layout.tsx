@@ -1,7 +1,6 @@
 import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import Header from "./_components/header";
-import Bottom from "./_components/bottom";
 
 export default function RootLayout({
   children,
@@ -13,7 +12,6 @@ export default function RootLayout({
         <main className="container mx-auto flex-grow px-4 py-8">
           {children}
         </main>
-        {/* <Bottom /> */}
       </body>
     </html>
   );

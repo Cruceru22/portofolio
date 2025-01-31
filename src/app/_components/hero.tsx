@@ -60,9 +60,11 @@ function LoadingSpinner() {
 function AnimatedComponent({
   children,
   delay = 0,
+  minHeight = "400px",
 }: {
   children: React.ReactNode;
   delay?: number;
+  minHeight?: string;
 }) {
   const controls = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -100,7 +102,8 @@ function AnimatedComponent({
         scale: 1.02,
         transition: { duration: 0.2 },
       }}
-      className="relative rounded-xl bg-white/5 p-6 shadow-xl transition-colors hover:bg-white/10"
+      className="relative w-full rounded-xl bg-white/5 p-6 shadow-xl transition-colors hover:bg-white/10"
+      style={{ minHeight }}
     >
       {children}
     </motion.div>
@@ -136,13 +139,13 @@ function useInView(options: IntersectionObserverInit = {}) {
 export default function Hero() {
   const { ref: carRef, isInView: isCarInView } = useInView({
     threshold: 0.1,
-    rootMargin: "100px 0px",
+    rootMargin: "200px 0px",
   });
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <motion.div
-        className="mx-auto flex max-w-2xl flex-col space-y-8"
+        className="mx-auto flex max-w-2xl flex-col space-y-12"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -160,8 +163,8 @@ export default function Hero() {
             </Suspense>
           </AnimatedComponent>
 
-          <AnimatedComponent delay={0.4}>
-            <div ref={carRef} className="min-h-[200px]">
+          <AnimatedComponent delay={0.4} minHeight="600px">
+            <div ref={carRef} className="h-full w-full">
               {isCarInView && (
                 <Suspense fallback={<LoadingSpinner />}>
                   <Car />
