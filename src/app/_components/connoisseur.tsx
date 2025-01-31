@@ -76,7 +76,7 @@ export default function Connoisseur() {
     <div id="car" className="mx-auto flex w-full max-w-3xl flex-col pt-12">
       <p className="mb-4 pl-2 text-lg font-semibold">Car Connoisseur</p>
       <div className="mt-4 flex flex-col items-start">
-        <div className="mb-4 pl-4">
+        <div className="mb-4 pl-2">
           <p className="mb-2 text-lg">
             The BMW M4 is a high-performance model, known for its impressive
             power and acceleration.

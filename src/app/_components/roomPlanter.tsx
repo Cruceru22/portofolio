@@ -71,7 +71,7 @@ export default function RoomPlanter() {
             </motion.div>
 
             <motion.h2
-              className="text-4xl font-bold tracking-tight text-gray-900"
+              className="text-4xl font-bold tracking-tight text-gray-900 transition-colors duration-300 hover:text-green-600"
               variants={itemVariants}
             >
               Room Planter

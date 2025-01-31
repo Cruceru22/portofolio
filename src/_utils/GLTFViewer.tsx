@@ -5,6 +5,9 @@ import {
   useGLTF,
   Environment,
   PerspectiveCamera,
+  AdaptiveDpr,
+  BakeShadows,
+  AdaptiveEvents,
 } from "@react-three/drei";
 import * as THREE from "three";
 import { GLTF } from "three-stdlib";
@@ -28,30 +31,46 @@ function Model({ url }: { url: string }) {
       const center = box.getCenter(new THREE.Vector3());
       const size = box.getSize(new THREE.Vector3());
 
+      // Adjust camera position for better car view
       const maxDim = Math.max(size.x, size.y, size.z);
-      let cameraZ = 0;
+      const distance = maxDim * 1.5; // Increased distance for better perspective
+      const height = maxDim * 0.5; // Camera height relative to model
 
-      if (camera instanceof THREE.PerspectiveCamera) {
-        const fov = camera.fov * (Math.PI / 180);
-        cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-      } else {
-        // For orthographic camera, you might want to adjust this calculation
-        cameraZ = maxDim * 2;
-      }
-
-      camera.position.set(center.x, center.y, center.z + cameraZ);
+      camera.position.set(
+        center.x + distance * 0.8, // Slightly offset to show more of the side
+        center.y + height,
+        center.z + distance * 0.8,
+      );
       camera.lookAt(center);
       camera.updateProjectionMatrix();
 
+      // Center the model
       modelRef.current.position.set(-center.x, -center.y, -center.z);
+
+      // Optimize materials and add slight tilt
+      scene.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          child.castShadow = false;
+          child.receiveShadow = false;
+          if (child.material instanceof THREE.MeshStandardMaterial) {
+            child.material.roughness = 0.4; // More glossy
+            child.material.metalness = 0.6; // More metallic
+          }
+        }
+      });
+
+      // Add initial rotation for better angle
+      if (modelRef.current) {
+        modelRef.current.rotation.y = Math.PI * 0.25; // 45-degree initial rotation
+      }
+
       setIsInitialized(true);
     }
-  }, [camera, isInitialized]);
+  }, [camera, isInitialized, scene]);
 
   useFrame((state, delta) => {
     if (modelRef.current) {
-      // Slower rotation speed and using sin for smoother animation
-      modelRef.current.rotation.y += delta * 0.2;
+      modelRef.current.rotation.y += delta * 0.2; // Slightly faster rotation
     }
   });
 
@@ -69,26 +88,44 @@ export default function GLTFViewer({ modelPath }: GLTFViewerProps) {
 
   return (
     <div className="h-[80vh] w-full">
-      <Canvas shadows dpr={[1, 2]}>
+      <Canvas
+        shadows={false}
+        dpr={[1, 1.5]}
+        gl={{
+          antialias: true,
+          powerPreference: "high-performance",
+          alpha: false,
+        }}
+        performance={{ min: 0.5 }}
+      >
         <Suspense fallback={null}>
           <Model url={modelPath} />
           <Environment preset="sunset" />
-          <ambientLight intensity={0.3} />
+          <ambientLight intensity={0.3} /> {/* Increased ambient light */}
           <spotLight
-            position={[10, 10, 10]}
-            angle={0.15}
+            position={[15, 15, 15]}
+            angle={0.25}
             penumbra={1}
             intensity={0.8}
-            castShadow
-            shadow-mapSize={[1024, 1024]}
+            castShadow={false}
           />
-          <PerspectiveCamera makeDefault fov={50} position={[0, 0, 8]} />
+          <PerspectiveCamera
+            makeDefault
+            fov={45} // Narrower FOV for less distortion
+            position={[0, 0, 8]}
+          />
           <OrbitControls
             enablePan={false}
             enableZoom={false}
-            minPolarAngle={Math.PI / 4}
-            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 3}
+            maxPolarAngle={Math.PI * 0.6}
+            enableDamping={true}
+            dampingFactor={0.05}
+            rotateSpeed={0.5}
           />
+          <AdaptiveDpr pixelated />
+          <BakeShadows />
+          <AdaptiveEvents />
         </Suspense>
       </Canvas>
     </div>
