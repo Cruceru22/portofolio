@@ -35,7 +35,6 @@ export default function Connoisseur() {
   const chartData: ChartDataItem[] = [
     { metric: "Horsepower", m4: 425, myCar: 313, unit: "hp" },
     { metric: "Torque", m4: 550, myCar: 630, unit: "Nm" },
-    { metric: "0-100 km/h", m4: 10 / 4.1, myCar: 10 / 4.6, unit: "1/s" },
   ];
 
   const chartConfig = {
