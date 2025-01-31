@@ -126,8 +126,8 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
     let gridParams: ReturnType<typeof setupCanvas>;
 
     const updateCanvasSize = () => {
-      const newWidth = width || container.clientWidth;
-      const newHeight = height || container.clientHeight;
+      const newWidth = width ?? container.clientWidth;
+      const newHeight = height ?? container.clientHeight;
       setCanvasSize({ width: newWidth, height: newHeight });
       gridParams = setupCanvas(canvas, newWidth, newHeight);
     };
@@ -162,7 +162,9 @@ export const FlickeringGrid: React.FC<FlickeringGridProps> = ({
 
     const intersectionObserver = new IntersectionObserver(
       ([entry]) => {
-        setIsInView(entry.isIntersecting);
+        if (entry) {
+          setIsInView(entry.isIntersecting);
+        }
       },
       { threshold: 0 },
     );

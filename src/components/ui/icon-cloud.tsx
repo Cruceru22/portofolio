@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -15,13 +16,20 @@ interface Icon {
 interface IconCloudProps {
   icons?: React.ReactNode[];
   images?: string[];
+  width?: number;
+  height?: number;
 }
 
 function easeOutCubic(t: number): number {
   return 1 - Math.pow(1 - t, 3);
 }
 
-export function IconCloud({ icons, images }: IconCloudProps) {
+export function IconCloud({
+  icons,
+  images,
+  width = 400,
+  height = 400,
+}: IconCloudProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [iconPositions, setIconPositions] = useState<Icon[]>([]);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -41,12 +49,13 @@ export function IconCloud({ icons, images }: IconCloudProps) {
   const rotationRef = useRef(rotation);
   const iconCanvasesRef = useRef<HTMLCanvasElement[]>([]);
   const imagesLoadedRef = useRef<boolean[]>([]);
+  const isHovered = images?.map(() => false) ?? [];
 
   // Create icon canvases once when icons/images change
   useEffect(() => {
     if (!icons && !images) return;
 
-    const items = icons || images || [];
+    const items = icons ?? images ?? [];
     imagesLoadedRef.current = new Array(items.length).fill(false);
 
     const newIconCanvases = items.map((item, index) => {
@@ -96,7 +105,7 @@ export function IconCloud({ icons, images }: IconCloudProps) {
 
   // Generate initial icon positions on a sphere
   useEffect(() => {
-    const items = icons || images || [];
+    const items = icons ?? images ?? [];
     const newIcons: Icon[] = [];
     const numIcons = items.length || 20;
 
@@ -310,8 +319,8 @@ export function IconCloud({ icons, images }: IconCloudProps) {
   return (
     <canvas
       ref={canvasRef}
-      width={400}
-      height={400}
+      width={width}
+      height={height}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}

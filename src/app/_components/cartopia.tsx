@@ -31,23 +31,15 @@ const features = [
   },
 ];
 
-const techStack = [
-  "Next.js",
-  "React",
-  "TailwindCSS",
-  "TypeScript",
-  "Shadcn",
-  "Vercel",
-  "Auth",
-];
-
 const slugs = [
   "nextdotjs",
   "react",
   "typescript",
   "tailwindcss",
   "vercel",
+  "prisma",
   "clerk",
+  "radixui",
   "framermotion",
 ];
 

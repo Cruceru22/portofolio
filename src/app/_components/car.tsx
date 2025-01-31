@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -12,9 +13,7 @@ import { motion } from "framer-motion";
 const GLTFViewer = dynamic(() => import("../../_utils/GLTFViewer"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-[80vh] w-full items-center justify-center">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-gray-900 border-t-transparent"></div>
-    </div>
+    <div className="h-[300px] w-[300px] animate-pulse rounded-lg bg-gray-200" />
   ),
 });
 
