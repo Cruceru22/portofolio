@@ -35,21 +35,17 @@ export default function Developer() {
       viewport={{ once: true }}
     >
       <motion.h1 className="text-4xl font-bold" variants={itemVariants}>
-        Hi, I&apos;m Andrei Cruceru
+        Hi, I&apos;m Andrei
       </motion.h1>
-      <motion.div className="text-xl text-gray-600" variants={itemVariants}>
+
+      <motion.div className="text-lg text-gray-600" variants={itemVariants}>
         <TypeAnimation
           sequence={[
-            "I'm a Web Developer",
-            1000,
-            "I'm a Car Enthusiast",
-            1000,
-            "I'm a Tech Lover",
-            1000,
+            "I am just a guy from Romania. I have worked over a year and now I am trying to get a job in the states.",
           ]}
           wrapper="span"
           speed={50}
-          repeat={Infinity}
+          cursor={true}
         />
       </motion.div>
     </motion.div>
