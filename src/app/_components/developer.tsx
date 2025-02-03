@@ -41,10 +41,10 @@ export default function Developer() {
       <motion.div className="text-lg text-gray-600" variants={itemVariants}>
         <TypeAnimation
           sequence={[
-            "I am just a guy from Romania. I have worked over a year and now I am trying to get a job in the states.",
+            "I'm a Full Stack Developer from Romania who loves building cool stuff on the web. After over a year of crafting awesome projects, I'm ready for new adventures!",
           ]}
           wrapper="span"
-          speed={50}
+          speed={75}
           cursor={true}
         />
       </motion.div>
