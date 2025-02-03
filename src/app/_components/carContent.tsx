@@ -57,10 +57,10 @@ export default function CarContent() {
           transition={{ duration: 0.2 }}
         >
           <Button
-            className={`relative h-28 w-28 overflow-hidden rounded-full border-8 border-gray-800 ${
+            className={`relative h-28 w-28 overflow-hidden rounded-full border-8 ${
               isPlaying
-                ? "bg-red-600 shadow-lg shadow-red-500/50"
-                : "bg-gray-700 hover:bg-gray-600"
+                ? "border-red-200 bg-red-500 shadow-lg shadow-red-500/50"
+                : "border-gray-200 bg-white hover:bg-gray-50"
             }`}
             onClick={toggleSound}
             disabled={!soundLoaded}
@@ -72,15 +72,17 @@ export default function CarContent() {
             </span>
             <div
               className={`absolute inset-2 flex items-center justify-center rounded-full ${
-                isPlaying ? "bg-red-500" : "bg-gray-600"
+                isPlaying ? "bg-red-400" : "bg-gray-100"
               }`}
             >
               <div
                 className={`flex h-20 w-20 items-center justify-center rounded-full ${
-                  isPlaying ? "bg-red-700" : "bg-gray-700"
+                  isPlaying ? "bg-red-600" : "border border-gray-200 bg-white"
                 }`}
               >
-                <span className="text-lg font-bold text-white">
+                <span
+                  className={`text-lg font-bold ${isPlaying ? "text-white" : "text-gray-900"}`}
+                >
                   {!soundLoaded ? "LOADING" : isPlaying ? "STOP" : "START"}
                 </span>
               </div>

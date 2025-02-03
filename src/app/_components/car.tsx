@@ -83,7 +83,7 @@ export default function Car() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-center space-x-4 rounded-xl bg-white/50 p-4 shadow-sm backdrop-blur-sm"
+                  className="flex items-center space-x-4 rounded-xl bg-white/80 p-4 shadow-sm backdrop-blur-sm"
                 >
                   <div className="rounded-full bg-blue-100 p-2 sm:p-3">
                     {feature.icon}
@@ -112,7 +112,7 @@ export default function Car() {
                   </p>
                   <Button
                     onClick={() => setIsLoaded(true)}
-                    className="rounded-full bg-gray-800 px-6 py-5 text-base font-semibold text-white transition-colors hover:bg-gray-700 sm:px-8 sm:py-6 sm:text-lg"
+                    className="rounded-full border border-gray-200 bg-white px-6 py-5 text-base font-semibold text-gray-900 transition-colors hover:bg-gray-50 sm:px-8 sm:py-6 sm:text-lg"
                   >
                     Load BMW Experience
                   </Button>
@@ -123,7 +123,7 @@ export default function Car() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3 }}
-                  className="w-full rounded-xl bg-white/50 p-3 shadow-sm backdrop-blur-sm sm:p-4"
+                  className="w-full rounded-xl bg-white/80 p-3 backdrop-blur-sm sm:p-4"
                 >
                   <CarContent />
                 </motion.div>

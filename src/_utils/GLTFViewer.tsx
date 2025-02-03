@@ -67,7 +67,6 @@ function Scene({ modelPath }: { modelPath: string }) {
         angle={0.25}
         penumbra={1}
         intensity={1}
-        castShadow
       />
       <PerspectiveCamera makeDefault fov={40} position={[0, 0, 10]} />
     </>
@@ -86,8 +85,9 @@ export default function GLTFViewer({ modelPath }: GLTFViewerProps) {
         gl={{
           antialias: true,
           powerPreference: "high-performance",
-          alpha: false,
+          alpha: true,
         }}
+        style={{ background: "rgb(255 255 255 / 0.5)" }}
       >
         <Suspense fallback={<LoadingScreen />}>
           <Scene modelPath={modelPath} />
