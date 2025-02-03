@@ -173,7 +173,7 @@ export default function RoomPlanter() {
           </motion.div>
 
           {/* Tech Stack */}
-          <motion.div variants={itemVariants} className="mt-8 text-center">
+          {/* <motion.div variants={itemVariants} className="mt-8 text-center">
             <motion.h3
               variants={itemVariants}
               className="mb-6 text-sm font-semibold uppercase tracking-wider text-gray-500"
@@ -183,7 +183,7 @@ export default function RoomPlanter() {
             <div className="relative mx-auto h-[400px] w-[400px] overflow-hidden rounded-lg bg-white/80">
               <IconCloud images={images} />
             </div>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </motion.div>

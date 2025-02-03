@@ -46,10 +46,8 @@ export default function Car() {
 
   return (
     <div className="flex w-full flex-col items-center space-y-4">
-      <div className="-mx-6 -mt-6 flex w-screen justify-center overflow-hidden">
-        <div className="w-full">
-          <GLTFViewer modelPath="/m4.gltf" />
-        </div>
+      <div className="w-full">
+        <GLTFViewer modelPath="/m4.gltf" />
       </div>
 
       <AnimatePresence>

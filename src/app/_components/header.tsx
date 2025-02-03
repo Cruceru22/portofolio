@@ -1,28 +1,33 @@
 "use client";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+
+import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import profilePic from "../../../utils/Images/profilx.jpg";
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import ProfilePicture from "../../../utils/Images/profilx.jpg";
+
 export default function Header() {
-  useGSAP(() => {
-    gsap.to("#Avatar", {
-      opacity: 1,
-      delay: 0.5,
-    });
-  }, []);
   return (
     <div className="flex justify-center p-10">
-      <Link
-        href="https://x.com/andreicruceruu"
-        id="Avatar"
-        className="opacity-0"
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.5,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
       >
-        <Avatar>
-          <AvatarImage src={profilePic.src} />
-          <AvatarFallback>...</AvatarFallback>
-        </Avatar>
-      </Link>
+        <Link href="https://x.com/andreicruceruu" target="_blank">
+          <Image
+            id="Avatar"
+            src={ProfilePicture}
+            alt="Avatar"
+            width={50}
+            height={50}
+            className="rounded-full transition-transform hover:scale-110"
+          />
+        </Link>
+      </motion.div>
     </div>
   );
 }

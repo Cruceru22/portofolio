@@ -14,22 +14,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="relative min-h-screen w-full overflow-x-hidden">
-          <FlickeringGrid
-            className="fixed left-0 right-0 top-0 -z-10 h-full w-screen [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
-            squareSize={4}
-            gridGap={6}
-            color="#60A5FA"
-            maxOpacity={0.5}
-            flickerChance={0.1}
-            height={3000}
-            width={3000}
-          />
-          <div className="relative z-10">
-            <Header />
-            <main className="mx-auto max-w-7xl px-4">{children}</main>
-          </div>
+      <body className={`${inter.className} relative`}>
+        <FlickeringGrid
+          className="fixed left-0 right-0 top-0 -z-10 h-full w-screen [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
+          squareSize={4}
+          gridGap={6}
+          color="#60A5FA"
+          maxOpacity={0.5}
+          flickerChance={0.1}
+          height={3000}
+          width={3000}
+        />
+        <div className="relative z-10">
+          <Header />
+          <main className="container mx-auto px-4">{children}</main>
         </div>
       </body>
     </html>

@@ -164,7 +164,7 @@ export default function Cartopia() {
             />
           </motion.div>
 
-          {/* Tech Stack */}
+          {/* Tech Stack
           <motion.div variants={fadeInUp}>
             <motion.h3
               variants={fadeInUp}
@@ -175,7 +175,7 @@ export default function Cartopia() {
             <div className="relative mx-auto h-[400px] w-[400px] overflow-hidden rounded-lg bg-white/80">
               <IconCloud images={images} />
             </div>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </motion.div>
     </div>

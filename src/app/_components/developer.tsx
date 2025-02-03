@@ -1,27 +1,57 @@
-import React from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+"use client";
+
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
 
 export default function Developer() {
-  useGSAP(() => {
-    gsap.from("#web p", {
-      opacity: 0,
-      y: 20,
-      duration: 0.8,
-      stagger: 0.4,
-    });
-  });
-
   return (
-    <div className="flex pl-4 pt-4">
-      <div id="web" className="max-w-md">
-        <p className="mb-8 text-lg font-bold">Andrei Cruceru</p>
-        <p className="mb-4 text-lg">
-          Crafting digital experiences through code. As a web developer, I bring
-          ideas to life on the internet, creating interactive and engaging
-          websites that connect people and businesses.
-        </p>
-      </div>
-    </div>
+    <motion.div
+      id="web"
+      className="flex h-full flex-col items-center justify-center gap-4"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      <motion.h1 className="text-4xl font-bold" variants={itemVariants}>
+        Hi, I&apos;m Andrei
+      </motion.h1>
+      <motion.div className="text-xl text-gray-600" variants={itemVariants}>
+        <TypeAnimation
+          sequence={[
+            "I'm a Web Developer",
+            1000,
+            "I'm a Car Enthusiast",
+            1000,
+            "I'm a Tech Lover",
+            1000,
+          ]}
+          wrapper="span"
+          speed={50}
+          repeat={Infinity}
+        />
+      </motion.div>
+    </motion.div>
   );
 }
