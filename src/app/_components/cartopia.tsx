@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaCar, FaChartBar } from "react-icons/fa";
 import cartopiaUI from "../../../utils/Images/cartopiacompare.png";
-import { IconCloud } from "~/components/ui/icon-cloud";
+
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -112,7 +112,7 @@ export default function Cartopia() {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                href="https://cartopia.vercel.app"
+                href="https://cartopia-pied.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center rounded-lg bg-blue-600 px-6 py-3 text-white transition-all hover:-translate-y-1 hover:bg-blue-700 hover:shadow-lg"
@@ -163,19 +163,6 @@ export default function Cartopia() {
               transition={{ duration: 0.3 }}
             />
           </motion.div>
-
-          {/* Tech Stack
-          <motion.div variants={fadeInUp}>
-            <motion.h3
-              variants={fadeInUp}
-              className="mb-6 text-sm font-semibold uppercase tracking-wider text-gray-500"
-            >
-              Built with
-            </motion.h3>
-            <div className="relative mx-auto h-[400px] w-[400px] overflow-hidden rounded-lg bg-white/80">
-              <IconCloud images={images} />
-            </div>
-          </motion.div> */}
         </motion.div>
       </motion.div>
     </div>

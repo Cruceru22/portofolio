@@ -5,24 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaLeaf, FaCamera } from "react-icons/fa";
 import roomPlanterUI from "../../../utils/Images/roomplanterui.png";
-import { IconCloud } from "~/components/ui/icon-cloud";
-
-const slugs = [
-  "nextdotjs",
-  "react",
-  "typescript",
-  "tailwindcss",
-  "openai",
-  "framermotion",
-];
 
 export default function RoomPlanter() {
   const { scrollYProgress } = useScroll();
   const imageScale = useTransform(scrollYProgress, [0.5, 1], [1, 1.1]);
   const imageRotate = useTransform(scrollYProgress, [0.5, 1], [0, 2]);
-  const images = slugs.map(
-    (slug) => `https://cdn.simpleicons.org/${slug}/000000`,
-  );
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -171,19 +158,6 @@ export default function RoomPlanter() {
               transition={{ duration: 0.3 }}
             />
           </motion.div>
-
-          {/* Tech Stack */}
-          {/* <motion.div variants={itemVariants} className="mt-8 text-center">
-            <motion.h3
-              variants={itemVariants}
-              className="mb-6 text-sm font-semibold uppercase tracking-wider text-gray-500"
-            >
-              Built with
-            </motion.h3>
-            <div className="relative mx-auto h-[400px] w-[400px] overflow-hidden rounded-lg bg-white/80">
-              <IconCloud images={images} />
-            </div>
-          </motion.div> */}
         </div>
       </div>
     </motion.div>

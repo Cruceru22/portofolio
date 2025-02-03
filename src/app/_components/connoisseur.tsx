@@ -1,14 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaCar, FaChartBar } from "react-icons/fa";
+import { FaCar } from "react-icons/fa";
 import {
   BarChart,
   Bar,
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 
@@ -58,12 +57,7 @@ export default function Connoisseur() {
   };
 
   const formatYAxis = (value: number): string => {
-    const metric = chartData.find(
-      (item) => item.m4 === value || item.myCar === value,
-    );
-    return metric
-      ? `${value}${metric.unit === "1/s" ? "" : ` ${metric.unit}`}`
-      : value.toString();
+    return value.toString();
   };
 
   const formatTooltip = (
@@ -73,9 +67,6 @@ export default function Connoisseur() {
   ): [string, string] => {
     if (props.payload) {
       const { unit } = props.payload;
-      if (unit === "1/s") {
-        return [`${(10 / value).toFixed(1)} s`, name];
-      }
       return [`${value} ${unit}`, name];
     }
     return [value.toString(), name];
@@ -121,20 +112,16 @@ export default function Connoisseur() {
               engine.
             </motion.p>
 
-            <motion.div
-              variants={itemVariants}
-              className="relative aspect-[16/9] w-full overflow-hidden rounded-xl"
-            >
-              <div className="h-[400px] w-full">
+            <motion.div variants={itemVariants} className="relative w-full">
+              <div className="h-[300px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
                     data={chartData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
                   >
                     <XAxis dataKey="metric" />
-                    <YAxis tickFormatter={formatYAxis} />
+                    <YAxis domain={[0, 800]} tickFormatter={formatYAxis} />
                     <Tooltip formatter={formatTooltip} />
-                    <Legend />
                     <Bar
                       dataKey="m4"
                       fill={chartConfig.m4.color}
@@ -147,6 +134,24 @@ export default function Connoisseur() {
                     />
                   </BarChart>
                 </ResponsiveContainer>
+              </div>
+              <div className="mt-2 text-center text-sm text-gray-500">
+                <div className="flex justify-center gap-4">
+                  <span className="flex items-center">
+                    <span
+                      className="mr-1 inline-block h-3 w-3"
+                      style={{ backgroundColor: chartConfig.m4.color }}
+                    ></span>
+                    BMW M4
+                  </span>
+                  <span className="flex items-center">
+                    <span
+                      className="mr-1 inline-block h-3 w-3"
+                      style={{ backgroundColor: chartConfig.myCar.color }}
+                    ></span>
+                    My BMW 435d
+                  </span>
+                </div>
               </div>
             </motion.div>
           </div>

@@ -41,11 +41,9 @@ function LoadingSpinner() {
 function AnimatedSection({
   children,
   height,
-  isCarSection,
 }: {
   children: React.ReactNode;
   height: string;
-  isCarSection?: boolean;
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "100px 0px" });
@@ -56,7 +54,7 @@ function AnimatedSection({
       variants={itemVariants}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className={`${height} relative w-full rounded-xl ${isCarSection ? "border-4 border-red-500" : ""} bg-white/80 p-6 shadow-xl backdrop-blur-sm will-change-transform`}
+      className={`${height} relative w-full rounded-xl bg-white/80 p-6 shadow-xl backdrop-blur-sm will-change-transform`}
     >
       {isInView && children}
     </motion.div>
@@ -96,7 +94,7 @@ export default function Hero() {
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection height="min-h-[800px]" isCarSection>
+        <AnimatedSection height="min-h-[800px]">
           <Suspense fallback={<LoadingSpinner />}>
             <Car />
           </Suspense>

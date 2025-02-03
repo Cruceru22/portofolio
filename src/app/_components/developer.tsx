@@ -35,7 +35,7 @@ export default function Developer() {
       viewport={{ once: true }}
     >
       <motion.h1 className="text-4xl font-bold" variants={itemVariants}>
-        Hi, I&apos;m Andrei
+        Hi, I&apos;m Andrei Cruceru
       </motion.h1>
       <motion.div className="text-xl text-gray-600" variants={itemVariants}>
         <TypeAnimation

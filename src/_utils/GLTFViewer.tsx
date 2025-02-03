@@ -37,8 +37,8 @@ function Scene({ modelPath }: { modelPath: string }) {
       const box = new THREE.Box3().setFromObject(modelRef.current);
       const center = box.getCenter(new THREE.Vector3());
 
-      // Use uniform scaling
-      const scale = 1.2;
+      // Use different scale for mobile and desktop
+      const scale = window.innerWidth < 640 ? 0.8 : 1.2;
 
       modelRef.current.position.copy(center.multiplyScalar(-1));
       // Adjust Y position to center vertically
@@ -79,7 +79,7 @@ useGLTF.preload("/m4.gltf");
 
 export default function GLTFViewer({ modelPath }: GLTFViewerProps) {
   return (
-    <div className="h-[80vh] w-full">
+    <div className="h-[50vh] w-full sm:h-[80vh]">
       <Canvas
         dpr={[1, 2]}
         performance={{ min: 0.5 }}
