@@ -9,6 +9,7 @@ const Connoisseur = dynamic(() => import("./connoisseur"), { ssr: false });
 const LetsConnect = dynamic(() => import("./letsConnect"), { ssr: false });
 const RoomPlanter = dynamic(() => import("./roomPlanter"), { ssr: false });
 const Cartopia = dynamic(() => import("./cartopia"), { ssr: false });
+const TechStack = dynamic(() => import("./techStack"), { ssr: false });
 
 const containerVariants = {
   visible: {
@@ -76,12 +77,6 @@ export default function Hero() {
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection height="min-h-[620px]">
-          <Suspense fallback={<LoadingSpinner />}>
-            <Connoisseur />
-          </Suspense>
-        </AnimatedSection>
-
         <AnimatedSection height="min-h-[800px]">
           <Suspense fallback={<LoadingSpinner />}>
             <Cartopia />
@@ -91,6 +86,18 @@ export default function Hero() {
         <AnimatedSection height="min-h-[800px]">
           <Suspense fallback={<LoadingSpinner />}>
             <RoomPlanter />
+          </Suspense>
+        </AnimatedSection>
+
+        <AnimatedSection height="min-h-[600px]">
+          <Suspense fallback={<LoadingSpinner />}>
+            <TechStack />
+          </Suspense>
+        </AnimatedSection>
+
+        <AnimatedSection height="min-h-[620px]">
+          <Suspense fallback={<LoadingSpinner />}>
+            <Connoisseur />
           </Suspense>
         </AnimatedSection>
 

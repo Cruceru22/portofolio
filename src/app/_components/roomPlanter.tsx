@@ -78,9 +78,10 @@ export default function RoomPlanter() {
             </motion.h2>
 
             <motion.p className="text-lg text-gray-600" variants={itemVariants}>
-              Transform your living space with the perfect plants. Simply upload
-              a photo of your room, and let AI help you visualize the perfect
-              plant arrangement for your space.
+              I created this project because I wanted to see how well I could
+              use AI to help me visualize the perfect plant arrangement for my
+              room. I was surprised that I couldn&apos;t find any other web app
+              that does this.
             </motion.p>
 
             <motion.div className="space-y-4" variants={itemVariants}>

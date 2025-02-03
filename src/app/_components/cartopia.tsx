@@ -31,24 +31,9 @@ const features = [
   },
 ];
 
-const slugs = [
-  "nextdotjs",
-  "react",
-  "typescript",
-  "tailwindcss",
-  "vercel",
-  "prisma",
-  "clerk",
-  "radixui",
-  "framermotion",
-];
-
 export default function Cartopia() {
   const { scrollYProgress } = useScroll();
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const images = slugs.map(
-    (slug) => `https://cdn.simpleicons.org/${slug}/000000`,
-  );
 
   return (
     <div className="relative overflow-hidden py-20">
@@ -87,9 +72,9 @@ export default function Cartopia() {
             </motion.h2>
 
             <motion.p variants={fadeInUp} className="text-lg text-gray-600">
-              Find your perfect ride with ease. Compare car specifications,
-              performance metrics, and features side by side to make an informed
-              decision about your next vehicle purchase.
+              I created this project because I couldn&apos;t find a good enough
+              website to compare cars. I wanted a nice interface and a good way
+              to see the comparisons.
             </motion.p>
 
             <motion.div variants={staggerContainer} className="space-y-4">
