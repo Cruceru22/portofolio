@@ -74,7 +74,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <AnimatedSection delay={0} height="h-[400px] sm:h-[300px]">
+        <AnimatedSection delay={0} height="h-[400px] sm:h-[250px]">
           <Suspense fallback={<LoadingSpinner />}>
             <Developer />
           </Suspense>

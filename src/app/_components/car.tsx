@@ -1,10 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { useState } from "react";
 import useSound from "use-sound";
 import { Button } from "~/components/ui/button";
 import { motion } from "framer-motion";

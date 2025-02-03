@@ -15,16 +15,11 @@ export default function Developer() {
   return (
     <div className="flex pl-4 pt-4">
       <div id="web" className="max-w-md">
-        <p className="text-lg font-bold">Web developer</p>
+        <p className="mb-8 text-lg font-bold">Andrei Cruceru</p>
         <p className="mb-4 text-lg">
           Crafting digital experiences through code. As a web developer, I bring
           ideas to life on the internet, creating interactive and engaging
           websites that connect people and businesses.
-        </p>
-
-        <p className="text-lg">
-          I moved to Cluj and studied Computer Science at UBB. I used to work at
-          fxbits
         </p>
       </div>
     </div>
