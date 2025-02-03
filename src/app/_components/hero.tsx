@@ -84,12 +84,6 @@ export default function Hero() {
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection height="min-h-[800px]" isCarSection>
-          <Suspense fallback={<LoadingSpinner />}>
-            <Car />
-          </Suspense>
-        </AnimatedSection>
-
         <AnimatedSection height="min-h-[800px]">
           <Suspense fallback={<LoadingSpinner />}>
             <Cartopia />
@@ -99,6 +93,12 @@ export default function Hero() {
         <AnimatedSection height="min-h-[800px]">
           <Suspense fallback={<LoadingSpinner />}>
             <RoomPlanter />
+          </Suspense>
+        </AnimatedSection>
+
+        <AnimatedSection height="min-h-[800px]" isCarSection>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Car />
           </Suspense>
         </AnimatedSection>
 

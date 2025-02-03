@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import useSound from "use-sound";
 import { Button } from "~/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Dynamically import GLTFViewer with no SSR and loading state
-const GLTFViewer = dynamic(() => import("../../_utils/GLTFViewer"), {
+const CarContent = dynamic(() => import("./carContent"), {
   ssr: false,
   loading: () => (
     <div className="flex h-[300px] w-[300px] items-center justify-center rounded-lg bg-gray-100">
@@ -17,86 +15,40 @@ const GLTFViewer = dynamic(() => import("../../_utils/GLTFViewer"), {
 });
 
 export default function Car() {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [soundLoaded, setSoundLoaded] = useState(false);
-  const [play, { stop }] = useSound("/m3.mp3", {
-    loop: true,
-    onload: () => setSoundLoaded(true),
-  });
-
-  // Cleanup sound on unmount
-  useEffect(() => {
-    return () => {
-      if (isPlaying) {
-        stop();
-      }
-    };
-  }, [isPlaying, stop]);
-
-  const toggleSound = useCallback(() => {
-    if (!soundLoaded) return;
-
-    if (isPlaying) {
-      stop();
-    } else {
-      play();
-    }
-    setIsPlaying(!isPlaying);
-  }, [isPlaying, play, stop, soundLoaded]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className="flex w-full flex-col items-center space-y-4">
-      <div className="w-full">
-        <GLTFViewer modelPath="/m4.gltf" />
-      </div>
-
-      <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.2 }}
-        >
-          <Button
-            className={`relative h-28 w-28 overflow-hidden rounded-full border-8 border-gray-800 ${
-              isPlaying
-                ? "bg-red-600 shadow-lg shadow-red-500/50"
-                : "bg-gray-700 hover:bg-gray-600"
-            }`}
-            onClick={toggleSound}
-            disabled={!soundLoaded}
-            aria-pressed={isPlaying}
-            aria-label={isPlaying ? "Stop engine" : "Start engine"}
+    <div className="flex w-full flex-col items-center space-y-8">
+      <AnimatePresence mode="wait">
+        {!isLoaded ? (
+          <motion.div
+            key="load-button"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="flex flex-col items-center space-y-4"
           >
-            <span className="sr-only">
-              {isPlaying ? "Stop engine" : "Start engine"}
-            </span>
-            <div
-              className={`absolute inset-2 flex items-center justify-center rounded-full ${
-                isPlaying ? "bg-red-500" : "bg-gray-600"
-              }`}
+            <p className="text-center text-lg text-gray-600">
+              Experience the BMW M4 in 3D with engine sound
+            </p>
+            <Button
+              onClick={() => setIsLoaded(true)}
+              className="rounded-full bg-gray-800 px-8 py-6 text-lg font-semibold text-white hover:bg-gray-700"
             >
-              <div
-                className={`flex h-20 w-20 items-center justify-center rounded-full ${
-                  isPlaying ? "bg-red-700" : "bg-gray-700"
-                }`}
-              >
-                <span className="text-lg font-bold text-white">
-                  {!soundLoaded ? "LOADING" : isPlaying ? "STOP" : "START"}
-                </span>
-              </div>
-            </div>
-            {soundLoaded && (
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center"
-                animate={{ rotate: isPlaying ? 45 : -45 }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="h-8 w-1 rounded-full bg-gray-300"></div>
-              </motion.div>
-            )}
-          </Button>
-        </motion.div>
+              Load BMW Experience
+            </Button>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="car-content"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="w-full"
+          >
+            <CarContent />
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );

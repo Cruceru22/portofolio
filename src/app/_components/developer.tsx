@@ -28,7 +28,7 @@ export default function Developer() {
   return (
     <motion.div
       id="web"
-      className="flex h-full flex-col items-center justify-center gap-4"
+      className="flex h-full flex-col gap-4 pl-4"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
