@@ -2,6 +2,7 @@
 
 import { Inter } from "next/font/google";
 import "~/styles/globals.css";
+import ProfilePicture from "../../utils/Images/profilx.jpg";
 import Header from "./_components/header";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -13,6 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>Andrei Cruceru | Web Developer</title>
+        <link rel="icon" href={ProfilePicture.src} />
+      </head>
       <body className={`${inter.className} relative`}>
         <div
           className="fixed left-0 right-0 top-0 -z-10 h-full w-screen opacity-70 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
