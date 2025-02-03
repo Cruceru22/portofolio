@@ -32,7 +32,7 @@ export function IconCloud({
 }: IconCloudProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [iconPositions, setIconPositions] = useState<Icon[]>([]);
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [rotation] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -49,7 +49,6 @@ export function IconCloud({
   const rotationRef = useRef(rotation);
   const iconCanvasesRef = useRef<HTMLCanvasElement[]>([]);
   const imagesLoadedRef = useRef<boolean[]>([]);
-  const isHovered = images?.map(() => false) ?? [];
 
   // Create icon canvases once when icons/images change
   useEffect(() => {

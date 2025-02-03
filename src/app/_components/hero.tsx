@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
-import { motion } from "framer-motion";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 const Developer = dynamic(() => import("./developer"), { ssr: false });
 const Car = dynamic(() => import("./car"), { ssr: false });
@@ -10,23 +10,23 @@ const LetsConnect = dynamic(() => import("./letsConnect"), { ssr: false });
 const RoomPlanter = dynamic(() => import("./roomPlanter"), { ssr: false });
 const Cartopia = dynamic(() => import("./cartopia"), { ssr: false });
 
+// Simplified animation variants for better performance
 const containerVariants = {
-  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1, // Reduced from 0.2
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 10 }, // Reduced y distance
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.3, // Reduced from 0.5
     },
   },
 };
@@ -41,26 +41,25 @@ function LoadingSpinner() {
 
 function AnimatedSection({
   children,
-  delay,
   height,
   isCarSection,
 }: {
   children: React.ReactNode;
-  delay: number;
   height: string;
   isCarSection?: boolean;
 }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "100px 0px" });
+
   return (
     <motion.div
+      ref={ref}
       variants={itemVariants}
       initial="hidden"
-      animate="visible"
-      transition={{ delay }}
-      className={`${height} relative w-full overflow-hidden rounded-xl ${
-        isCarSection ? "border-4 border-red-500" : ""
-      } bg-white/80 p-6 shadow-xl backdrop-blur-sm transition-all duration-300`}
+      animate={isInView ? "visible" : "hidden"}
+      className={`${height} relative w-full overflow-hidden rounded-xl ${isCarSection ? "border-4 border-red-500" : ""} bg-white/80 p-6 shadow-xl backdrop-blur-sm will-change-transform`}
     >
-      {children}
+      {isInView && children}
     </motion.div>
   );
 }
@@ -74,41 +73,37 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
       >
-        <AnimatedSection delay={0} height="h-[400px] sm:h-[250px]">
+        <AnimatedSection height="h-[400px] sm:h-[250px]">
           <Suspense fallback={<LoadingSpinner />}>
             <Developer />
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.2} height="h-[800px] sm:h-[620px]">
+        <AnimatedSection height="h-[800px] sm:h-[620px]">
           <Suspense fallback={<LoadingSpinner />}>
             <Connoisseur />
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection
-          delay={0.4}
-          height="h-[900px] sm:h-[800px]"
-          isCarSection
-        >
+        <AnimatedSection height="h-[900px] sm:h-[800px]" isCarSection>
           <Suspense fallback={<LoadingSpinner />}>
             <Car />
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.6} height="h-[1300px]">
+        <AnimatedSection height="h-[1300px]">
           <Suspense fallback={<LoadingSpinner />}>
             <Cartopia />
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.8} height="h-[1300px]">
+        <AnimatedSection height="h-[1300px]">
           <Suspense fallback={<LoadingSpinner />}>
             <RoomPlanter />
           </Suspense>
         </AnimatedSection>
 
-        <AnimatedSection delay={1} height="h-[400px] sm:h-[300px]">
+        <AnimatedSection height="h-[400px] sm:h-[300px]">
           <Suspense fallback={<LoadingSpinner />}>
             <LetsConnect />
           </Suspense>
